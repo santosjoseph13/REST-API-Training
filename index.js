@@ -1,9 +1,9 @@
 const express  = require('express');
-const bodyparser = require('body-parser');
+//const bodyparser = require('body-parser');
 
 const attendance = express();
 
-attendance.use(bodyparser.json());
+attendance.use(require('body-parser').json());
 
 attendance.use('/api',require('./routes/api'));
 

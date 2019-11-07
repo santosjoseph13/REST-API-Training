@@ -1,29 +1,31 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/employees',function(req,res){
+router.get('/employee',function(req,res){
 res.send({type:'GET'})
 });
 
-router.post('/employees',function(req,res){
-    res.send({type:'POST'})
-    
+
+router.post('/employee',function(req,res){
+    console.log(req.body);
+    res.send({
+        type:'POST',
+        name: req.body.name,
+        status: req.body.status        
+
+});
+     
+
 });
 
-router.post('/employees',function(req,res){
-    res.send({type:'POST'})
-  
 
-});
-
-
-router.put('/employees/:id',function(req,res){
+router.put('/employee/:id',function(req,res){
 res.send({type:'PUT'})
 
 });
 
-router.delete('/employees:id',function(req,res){
-res.send({type:'DELETE'})
+router.delete('/employee:id',function(req,res){
+res.send({type:'DELETE'})   
 
 });
 
