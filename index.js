@@ -1,11 +1,12 @@
 const express  = require('express');
-//const bodyparser = require('body-parser');
+const bodyparser = require('body-parser');
 const mongoose = require('mongoose');
 
 const attendance = express();
 mongoose.connect('mongodb://localhost/employeego');
+mongoose.Promise = global.Promise;
 
-attendance.use(require('body-parser').json());
+attendance.use(bodyparser.json());
 
 attendance.use('/api',require('./routes/api'));
 

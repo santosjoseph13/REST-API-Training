@@ -12,9 +12,10 @@ const EmployeeProperties = new Schema({
         type:String,
         required:[true,"Employee status needed."],
         default:"Probationary"
+       
     },    
     attendance:{
-        type:Int16Array,
+        type:Number,
         required:[true,"Enter number of days attended"]
     
     }

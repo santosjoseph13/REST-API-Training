@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const Employees = require('../models/employees');
 
 router.get('/employee',function(req,res){
 res.send({type:'GET'})
@@ -7,14 +8,11 @@ res.send({type:'GET'})
 
 
 router.post('/employee',function(req,res){
-    console.log(req.body);
-    res.send({
-        type:'POST',
-        name: req.body.name,
-        status: req.body.status        
 
-});
-     
+    Employees.create(req.body).then(function(employee){
+        res.send(employee);
+
+    });    
 
 });
 
