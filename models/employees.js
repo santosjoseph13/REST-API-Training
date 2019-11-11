@@ -2,6 +2,18 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 //create table and properties
+const GeoProperties = new Schema({
+    
+       
+        type: {
+          type: String,
+          default: "Point"
+        },
+        coordinates: {
+          type: [Number],
+          index: "2dsphere"        
+        }
+});
 
 const EmployeeProperties = new Schema({
     name:{
@@ -18,7 +30,8 @@ const EmployeeProperties = new Schema({
         type:Number,
         required:[true,"Enter number of days attended"]
     
-    }
+    },
+    geometry: GeoProperties
 
 
 

@@ -1,0 +1,96 @@
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" />
+<link href="/styles.css" rel="stylesheet" type="text/css"/>
+
+</head>
+
+<body>
+
+    <h1 class="title">Employee Attendance</h1>
+    <div id="homepage">
+        <h1>Check employeessssss</h1>
+        <div id="employees"></div>
+
+    </div>
+    
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="https://unpkg.com/react@15/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+
+    <script type="text/babel">
+
+    
+
+    var Employees = React.createClass({
+        
+        getInitialState: function(){
+ 
+            return({
+                employees:[]
+              });
+        },
+
+        render: function(){
+            
+            var employees = this.state.employees;
+            employees = employees.map(function(employee,index){
+                return(
+                    <li key= {index}>
+                        
+                        <span className="name">{employees.obj.name}</span>
+                        
+                    </li>
+                );
+            });
+            return(
+                
+                <div id = "employee-container">
+                    
+                    <form id="search" onSubmit={this.handleSubmit}>
+                                                
+                        <label>Enter your name:</label>
+                        <input type="text" ref="name" placeholder="name" required/>                 
+                        <input onclick="myFunction()" type="submit" value="Find Employee"/>
+                        <button onclick="myFunction()"/>
+                        
+
+                    </form>
+                    <ul>{employees}</ul>
+                </div>
+                
+            );
+            
+        },
+
+        handleSubmit: function(e){
+       
+            e.preventDefault();
+            var name = this.refs.name.value;
+  
+        
+        fetch('/api/employee?name='+name).then(function(data){
+            
+            return data.json();
+
+        }).then(json=> {
+            this.setState({
+                employees: json
+            });
+        });
+    }
+
+    });
+        ReactDOM.render(<Employees/>,document.getElementById('employees'));
+        console.log('lusot333');
+      
+        function myFunction() {
+  alert("Hello! I am an alert box!");
+  console.log('wawawawawa');
+}
+    </script>
+</body>
+
+</html>

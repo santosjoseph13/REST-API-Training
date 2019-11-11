@@ -3,12 +3,17 @@ const bodyparser = require('body-parser');
 const mongoose = require('mongoose');
 
 const attendance = express();
-mongoose.connect('mongodb://localhost/employeego');
+
+attendance.use(require)
+mongoose.connect('mongodb://localhost/employeego',{ useNewUrlParser: true, useCreateIndex: true });
 mongoose.Promise = global.Promise;
 
+attendance.use(express.static('public'));
 attendance.use(bodyparser.json());
 
 attendance.use('/api',require('./routes/api'));
+
+
 
 attendance.use(function(err,req,res,next){
 
@@ -16,7 +21,7 @@ attendance.use(function(err,req,res,next){
 res.send({message: err.message});
 });
 
-attendance.listen(4000, function() {
+attendance.listen(8080, function() {
 
     console.log('listening');
 } );

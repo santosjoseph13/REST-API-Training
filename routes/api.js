@@ -2,8 +2,27 @@ const express = require('express');
 const router = express.Router();
 const Employees = require('../models/employees');
 
-router.get('/employee',function(req,res,next){
-res.send({type:'GET'})
+router.get('/employee/',function(req,res,next){
+  /*   Employees.find({}).then(function(employee){
+        res.send(employee);
+
+    }).catch(next); */ 
+    Employees.aggregate().near({
+        near:[parseFloat(req.query.lng),parseFloat(req.query.lat)],
+        maxDistance: 100000,spherical:true,distanceField: "dis"
+    }).then(function(employee){
+        res.send(employee);
+    });
+ /*    Employees.find({"name":req.query.name}).then(function(employee){
+        res.send(employee); */
+
+        
+    });
+    
+ 
+
+
+    
 });
 
 
@@ -28,6 +47,8 @@ router.put('/employee/:id',function(req,res,next){
       });
 
 });
+
+
 
 router.delete('/employee/:id',function(req,res,next){
 
